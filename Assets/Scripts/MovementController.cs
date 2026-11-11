@@ -12,6 +12,8 @@ public class MovementController : MonoBehaviour
 
     public FacingDirection Facing { get; private set; } = FacingDirection.Down;
 
+    public bool IsMoving => MovementInput != Vector2.zero;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
