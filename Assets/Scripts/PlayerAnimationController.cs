@@ -15,36 +15,29 @@ public class PlayerAnimationController : MonoBehaviour
     [SerializeField] private Sprite idleLeft;
     [SerializeField] private Sprite idleRight;
 
-    // walking animations for each direction
-    [SerializeField] private SpriteAnimation walkUp;
-    [SerializeField] private SpriteAnimation walkDown;
-    [SerializeField] private SpriteAnimation walkLeft;
-    [SerializeField] private SpriteAnimation walkRight;
-
-    private SpriteAnimation currentAnimation;
+    [SerializeField] private PlayerSpriteAnimation spriteAnimation;
 
     private void Update()
     {
-
-        if(movementController.IsMoving)
+        if (movementController.IsMoving)
         {
             switch (movementController.Facing)
             {
                 case FacingDirection.Up:
-                    PlayAnimation(walkUp);
+                    PlayAnimation(PlayerSpriteAnimation.Animation.Up);
                     break;
 
                 case FacingDirection.Down:
-                    PlayAnimation(walkDown);
+                    PlayAnimation(PlayerSpriteAnimation.Animation.Down);
                     break;
 
                 case FacingDirection.Left:
-                    PlayAnimation(walkLeft);
+                    PlayAnimation(PlayerSpriteAnimation.Animation.Left);
                     break;
 
 
                 case FacingDirection.Right:
-                    PlayAnimation(walkRight);
+                    PlayAnimation(PlayerSpriteAnimation.Animation.Right);
                     break;
             }
 
@@ -53,30 +46,18 @@ public class PlayerAnimationController : MonoBehaviour
         {
             StopCurrentAnimation();
             SetIdleSprite();
-            
+
         }
     }
 
-    private void PlayAnimation(SpriteAnimation animation)
+    private void PlayAnimation(PlayerSpriteAnimation.Animation animation)
     {
-        if (currentAnimation == animation)
-        {
-            return;
-        }
-        StopCurrentAnimation();
-        currentAnimation = animation;
-        currentAnimation.Play();
+        spriteAnimation.Play(animation);
     }
-
 
     private void StopCurrentAnimation()
     {
-        if(currentAnimation != null)
-        {
-            currentAnimation.Stop();
-            currentAnimation = null;
-        }
-
+        spriteAnimation.Stop();
     }
 
     private void SetIdleSprite()

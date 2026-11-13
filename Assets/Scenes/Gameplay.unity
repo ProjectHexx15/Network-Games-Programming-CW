@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 264297315}
   - component: {fileID: 264297316}
   m_Layer: 0
-  m_Name: WalkUp
+  m_Name: PlayerSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -220,15 +220,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 264297313}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ac9c758d7089c643adb1e1cb845615e, type: 3}
+  m_Script: {fileID: 11500000, guid: 5488780c14091e44d8aaaeb704274419, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpriteAnimation
-  idleSprite: {fileID: 1432645988, guid: 253e95f3ed4970e4692f36c8b0f8a3ac, type: 3}
-  animationSprites:
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSpriteAnimation
+  idleSprite: {fileID: 252787635, guid: 253e95f3ed4970e4692f36c8b0f8a3ac, type: 3}
+  upAnimationSprites:
+  - {fileID: 1432645988, guid: 253e95f3ed4970e4692f36c8b0f8a3ac, type: 3}
   - {fileID: 1178621120, guid: 253e95f3ed4970e4692f36c8b0f8a3ac, type: 3}
   - {fileID: 1917874774, guid: 253e95f3ed4970e4692f36c8b0f8a3ac, type: 3}
   - {fileID: -517727268, guid: 253e95f3ed4970e4692f36c8b0f8a3ac, type: 3}
-  - {fileID: 1432645988, guid: 253e95f3ed4970e4692f36c8b0f8a3ac, type: 3}
+  downAnimationSprites:
+  - {fileID: 252787635, guid: 253e95f3ed4970e4692f36c8b0f8a3ac, type: 3}
+  - {fileID: -1696225563, guid: 253e95f3ed4970e4692f36c8b0f8a3ac, type: 3}
+  - {fileID: -1264212147, guid: 253e95f3ed4970e4692f36c8b0f8a3ac, type: 3}
+  - {fileID: 21300000, guid: 64eb61d0e93f1c4409b98207108364e0, type: 3}
+  leftAnimationSprites:
+  - {fileID: -1140217171, guid: 253e95f3ed4970e4692f36c8b0f8a3ac, type: 3}
+  - {fileID: 869891599, guid: 253e95f3ed4970e4692f36c8b0f8a3ac, type: 3}
+  - {fileID: -977539384, guid: 253e95f3ed4970e4692f36c8b0f8a3ac, type: 3}
+  - {fileID: -1682181392, guid: 253e95f3ed4970e4692f36c8b0f8a3ac, type: 3}
+  rightAnimationSprites:
+  - {fileID: 573909448, guid: 253e95f3ed4970e4692f36c8b0f8a3ac, type: 3}
+  - {fileID: 348617507, guid: 253e95f3ed4970e4692f36c8b0f8a3ac, type: 3}
+  - {fileID: 1233756171, guid: 253e95f3ed4970e4692f36c8b0f8a3ac, type: 3}
+  - {fileID: 686875465, guid: 253e95f3ed4970e4692f36c8b0f8a3ac, type: 3}
   frameRate: 0.1
 --- !u!1 &426214878
 GameObject:
@@ -465,10 +480,7 @@ MonoBehaviour:
   idleDown: {fileID: 252787635, guid: 253e95f3ed4970e4692f36c8b0f8a3ac, type: 3}
   idleLeft: {fileID: -1140217171, guid: 253e95f3ed4970e4692f36c8b0f8a3ac, type: 3}
   idleRight: {fileID: 573909448, guid: 253e95f3ed4970e4692f36c8b0f8a3ac, type: 3}
-  walkUp: {fileID: 264297316}
-  walkDown: {fileID: 0}
-  walkLeft: {fileID: 0}
-  walkRight: {fileID: 0}
+  spriteAnimation: {fileID: 264297316}
 --- !u!1 &786497704
 GameObject:
   m_ObjectHideFlags: 0
