@@ -10,6 +10,8 @@ public class SpriteAnimation : MonoBehaviour
     [SerializeField] private Sprite[] animationSprites;
 
     [SerializeField] private float frameRate = 0.1f;
+    [SerializeField] private bool isLooping = true;
+    [SerializeField] private bool isIdle = true;
 
     private float timer;
     private int currentFrame;
@@ -38,14 +40,21 @@ public class SpriteAnimation : MonoBehaviour
 
         timer += Time.deltaTime;
 
-        if(timer >= frameRate)
+
+        if (timer >= frameRate)
         {
             timer = 0;
             currentFrame++;
 
-            if(currentFrame >= animationSprites.Length)
+            if (isLooping && currentFrame >= animationSprites.Length)
             {
                 currentFrame = 0;
+
+            }
+
+            if(isIdle)
+            {
+                spriteRenderer.sprite = idleSprite;
             }
         }
 
