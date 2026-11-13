@@ -2,17 +2,7 @@ using UnityEngine;
 
 public class PlayerSpriteAnimation : MonoBehaviour
 {
-    public enum Animation
-    {
-        Up,
-        Down,
-        Left,
-        Right
-    }
-
     private SpriteRenderer spriteRenderer;
-
-    [SerializeField] private Sprite idleSprite;
 
     [SerializeField] private Sprite[] upAnimationSprites;
     [SerializeField] private Sprite[] downAnimationSprites;
@@ -20,6 +10,7 @@ public class PlayerSpriteAnimation : MonoBehaviour
     [SerializeField] private Sprite[] rightAnimationSprites;
 
     private Animation currentAnimation;
+    private FacingDirection currentFacingDirection;
 
     [SerializeField] private float frameRate = 0.1f;
 
@@ -52,21 +43,21 @@ public class PlayerSpriteAnimation : MonoBehaviour
 
             Sprite[] frames = null;
 
-            switch (currentAnimation)
+            switch (currentFacingDirection)
             {
-                case Animation.Up:
+                case FacingDirection.Up:
                     frames = upAnimationSprites;
                     break;
 
-                case Animation.Down:
+                case FacingDirection.Down:
                     frames = downAnimationSprites;
                     break;
 
-                case Animation.Left:
+                case FacingDirection.Left:
                     frames = leftAnimationSprites;
                     break;
 
-                case Animation.Right:
+                case FacingDirection.Right:
                     frames = rightAnimationSprites;
                     break;
             }
@@ -79,33 +70,33 @@ public class PlayerSpriteAnimation : MonoBehaviour
 
     }
 
-    public void Play(Animation animation)
+    public void Play(FacingDirection direction)
     {
-        if (isPlaying && currentAnimation == animation)
+        if (isPlaying && currentFacingDirection == direction)
         {
             return;
         }
 
-        currentAnimation = animation;
+        currentFacingDirection = direction;
         isPlaying = true;
 
-        Sprite[] frames = null;
+        Sprite[] frames = GetDirectionFrames(currentFacingDirection);
 
-        switch (currentAnimation)
+        switch (currentFacingDirection)
         {
-            case Animation.Up:
+            case FacingDirection.Up:
                 frames = upAnimationSprites;
                 break;
 
-            case Animation.Down:
+            case FacingDirection.Down:
                 frames = downAnimationSprites;
                 break;
 
-            case Animation.Left:
+            case FacingDirection.Left:
                 frames = leftAnimationSprites;
                 break;
 
-            case Animation.Right:
+            case FacingDirection.Right:
                 frames = rightAnimationSprites;
                 break;
         }
@@ -116,19 +107,33 @@ public class PlayerSpriteAnimation : MonoBehaviour
         }
     }
 
-
-
     public void Stop()
     {
         isPlaying = false;
         currentFrame = 0;
         timer = 0;
 
-        if (idleSprite != null)
-        {
-            spriteRenderer.sprite = idleSprite;
-        }
+    }
 
+    private Sprite[] GetDirectionFrames(FacingDirection direction)
+    {
+        switch (direction)
+        {
+            case FacingDirection.Up:
+                return upAnimationSprites;
+
+            case FacingDirection.Down:
+                return downAnimationSprites;
+
+            case FacingDirection.Left:
+                return leftAnimationSprites;
+
+            case FacingDirection.Right:
+                return rightAnimationSprites;
+
+            default:
+                return null;
+        }
     }
 
 }

@@ -1,4 +1,4 @@
-// for sprite swapping
+// for sprite swapping and animation
 
 public enum FacingDirection
 {

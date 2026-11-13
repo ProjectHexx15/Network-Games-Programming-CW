@@ -21,25 +21,7 @@ public class PlayerAnimationController : MonoBehaviour
     {
         if (movementController.IsMoving)
         {
-            switch (movementController.Facing)
-            {
-                case FacingDirection.Up:
-                    PlayAnimation(PlayerSpriteAnimation.Animation.Up);
-                    break;
-
-                case FacingDirection.Down:
-                    PlayAnimation(PlayerSpriteAnimation.Animation.Down);
-                    break;
-
-                case FacingDirection.Left:
-                    PlayAnimation(PlayerSpriteAnimation.Animation.Left);
-                    break;
-
-
-                case FacingDirection.Right:
-                    PlayAnimation(PlayerSpriteAnimation.Animation.Right);
-                    break;
-            }
+            spriteAnimation.Play(movementController.Facing);
 
         }
         else
@@ -50,9 +32,9 @@ public class PlayerAnimationController : MonoBehaviour
         }
     }
 
-    private void PlayAnimation(PlayerSpriteAnimation.Animation animation)
+    private void PlayAnimation(FacingDirection direction)
     {
-        spriteAnimation.Play(animation);
+        spriteAnimation.Play(direction);
     }
 
     private void StopCurrentAnimation()
