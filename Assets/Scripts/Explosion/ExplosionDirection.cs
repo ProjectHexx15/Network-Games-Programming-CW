@@ -1,8 +1,10 @@
 public enum ExplosionDirection
 {
+    Center,
+    Right,
     Up,
-    Down,
     Left,
-    Right
+    Down
+}    
 
-}
+

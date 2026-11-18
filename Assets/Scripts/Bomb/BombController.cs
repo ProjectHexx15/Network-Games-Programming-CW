@@ -4,22 +4,22 @@ using UnityEngine.InputSystem;
 
 public class BombController : MonoBehaviour
 {
-    // move these values to the player status, bomb controller should only manage bombs and explosions
-    private float bombFuseTime = 3f;
-    public int bombAmount = 1;
-    public int bombsRemaining;
-
-    private int explosionRadius = 2;
-
-    public InputAction placeBombAction;
     [SerializeField] private GameObject bombPrefab;
     [SerializeField] private GameObject explosionPrefab;
 
-    public ExplosionState explostate { get; private set; } = ExplosionState.Start;
+    public InputAction placeBombAction;
+
+    private PlayerStats stats;
+    private int bombsRemaining;
+
+    private void Awake()
+    {
+        stats = GetComponent<PlayerStats>();
+    }
 
     private void OnEnable()
     {
-        bombsRemaining = bombAmount;
+        bombsRemaining = stats.BombAmount;
         placeBombAction.Enable();
     }
 
@@ -30,15 +30,16 @@ public class BombController : MonoBehaviour
 
     private void Update()
     {
-        if (bombsRemaining >= 0 && placeBombAction.WasPressedThisFrame())
+
+
+        if (bombsRemaining > 0 && placeBombAction.WasPressedThisFrame())
         {
-            Debug.Log("im bombing it!");
-            StartCoroutine(PlaceBomb());
+            PlaceBomb();
         }
     }
 
 
-    private IEnumerator PlaceBomb()
+    private void PlaceBomb()
 
     {
         Vector2 position = transform.position;
@@ -46,33 +47,20 @@ public class BombController : MonoBehaviour
         position.x = Mathf.Round(position.x);
         position.y = Mathf.Round(position.y);
 
-        GameObject bomb = Instantiate(bombPrefab, position, Quaternion.identity);
+        GameObject bombObject = Instantiate(bombPrefab, position, Quaternion.identity);
+        Bomb bomb = bombObject.GetComponent<Bomb>();
+
+        bomb.Initialize(this);
+
         bombsRemaining--;
 
-        yield return new WaitForSeconds(bombFuseTime);
+    }
 
-        Destroy(bomb);
-
-        GameObject explosion = Instantiate(explosionPrefab, position, Quaternion.identity);
-
-        Destroy(explosion, 0.5f);
-
+    public void ReturnBomb()
+    {
         bombsRemaining++;
-
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Bomb"))
-        {
-            other.isTrigger = false;
-        }
-    }
-
-    private void SpawnExplosion(Vector2 position)
-    {
-        Instantiate(explosionPrefab, position, Quaternion.identity);
     }
 
 }
+
 

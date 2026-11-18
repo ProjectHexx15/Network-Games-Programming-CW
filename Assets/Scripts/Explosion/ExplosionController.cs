@@ -12,7 +12,10 @@ public class ExplosionController : MonoBehaviour
         State = state;
         Direction = direction;
 
-        spriteController.SetExplosion(this);
+        if(spriteController != null)
+        {
+            spriteController.SetExplosion(this);
+        }
     }
 
 

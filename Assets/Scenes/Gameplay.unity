@@ -244,6 +244,38 @@ MonoBehaviour:
   - {fileID: 1233756171, guid: 253e95f3ed4970e4692f36c8b0f8a3ac, type: 3}
   - {fileID: 686875465, guid: 253e95f3ed4970e4692f36c8b0f8a3ac, type: 3}
   frameRate: 0.1
+--- !u!1 &402083172
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 402083174}
+  m_Layer: 0
+  m_Name: Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &402083174
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 402083172}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1716249054}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &426214878
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,6 +383,7 @@ GameObject:
   - component: {fileID: 455325521}
   - component: {fileID: 455325522}
   - component: {fileID: 455325523}
+  - component: {fileID: 455325524}
   m_Layer: 0
   m_Name: NetworkPlayer
   m_TagString: Untagged
@@ -493,8 +526,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d398a97cbd831b04399e919e4c77f490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BombController
-  bombAmount: 1
-  bombsRemaining: 0
+  bombPrefab: {fileID: 745698910282898170, guid: e5f9d364baeb8b54093ebe3fb81ebb28, type: 3}
+  explosionPrefab: {fileID: 1484031657919509294, guid: 453fd15edf6bdea4b8172e2d3272d6cc, type: 3}
   placeBombAction:
     m_Name: Place Bomb
     m_Type: 0
@@ -513,8 +546,22 @@ MonoBehaviour:
       m_Flags: 0
     m_Flags: 0
     m_Priority: 0
-  bombPrefab: {fileID: 745698910282898170, guid: e5f9d364baeb8b54093ebe3fb81ebb28, type: 3}
-  explosionPrefab: {fileID: 1484031657919509294, guid: 453fd15edf6bdea4b8172e2d3272d6cc, type: 3}
+--- !u!114 &455325524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 455325516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67fd6a2bfc84b964cb6e6747b7365aea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
+  bombAmount: 1
+  blastRadius: 2
+  moveSpeed: 5
+  health: 3
 --- !u!1 &786497704
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,7 +572,7 @@ GameObject:
   m_Component:
   - component: {fileID: 786497706}
   - component: {fileID: 786497705}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -670,7 +717,7 @@ GameObject:
   - component: {fileID: 1205830030}
   - component: {fileID: 1205830029}
   - component: {fileID: 1205830031}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Destructable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3160,7 +3207,7 @@ GameObject:
   - component: {fileID: 1253679096}
   - component: {fileID: 1253679095}
   - component: {fileID: 1253679097}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Indestructable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8480,6 +8527,56 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!1 &1716249053
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1716249054}
+  - component: {fileID: 1716249055}
+  m_Layer: 0
+  m_Name: ExplosionManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1716249054
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1716249053}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 402083174}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1716249055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1716249053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e877c16e8e9248a48af60724cc511687, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExplosionManager
+  explosionPrefab: {fileID: 1484031657919509294, guid: 453fd15edf6bdea4b8172e2d3272d6cc, type: 3}
+  defaultRadius: 5
+  explosionDuration: 1
+  explosionLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -8488,3 +8585,4 @@ SceneRoots:
   - {fileID: 1028455615}
   - {fileID: 786497706}
   - {fileID: 455325519}
+  - {fileID: 402083174}
