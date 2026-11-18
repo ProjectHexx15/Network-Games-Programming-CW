@@ -26,10 +26,7 @@ public class ExplosionManager : MonoBehaviour
         {
             Vector2 nextPosition = position + direction * i;
 
-            Collider2D hit = Physics2D.OverlapPoint(
-                nextPosition,
-                explosionLayerMask
-            );
+            Collider2D hit = Physics2D.OverlapPoint(nextPosition, explosionLayerMask);
 
             if (hit != null)
             {
@@ -37,15 +34,9 @@ public class ExplosionManager : MonoBehaviour
                 break;
             }
 
-            ExplosionState state =
-                i == length
-                ? ExplosionState.End
-                : ExplosionState.Middle;
+            ExplosionState state = i == length ? ExplosionState.End : ExplosionState.Middle;
 
-            CreatePiece(
-                nextPosition,
-                state,
-                GetDirection(direction)
+            CreatePiece(nextPosition, state, GetDirection(direction)
             );
         }
     }
