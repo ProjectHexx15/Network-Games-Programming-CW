@@ -1,7 +1,12 @@
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class ExplosionManager : MonoBehaviour
 {
+    // temp for working version of destruction
+    public Tilemap destructibleTiles;
+    public GameObject obstaclePrefab;
+
     [SerializeField] private GameObject explosionPrefab;
 
     [SerializeField] private int defaultRadius = 2;
@@ -9,6 +14,7 @@ public class ExplosionManager : MonoBehaviour
     [SerializeField] private float explosionDuration = 0.5f;
 
     [SerializeField] private LayerMask explosionLayerMask;
+
 
     public void CreateExplosion(Vector2 center)
     {
@@ -30,15 +36,21 @@ public class ExplosionManager : MonoBehaviour
 
             if (hit != null)
             {
+                if(hit.CompareTag("Destructable"))
+                {
+                    ClearTile(nextPosition);
+                }
+
                 Debug.Log("Blocked by: " + hit.name);
                 break;
             }
 
             ExplosionState state = i == length ? ExplosionState.End : ExplosionState.Middle;
 
-            CreatePiece(nextPosition, state, GetDirection(direction)
-            );
+            CreatePiece(nextPosition, state, GetDirection(direction));
         }
+
+
     }
 
     private void CreatePiece(Vector2 position, ExplosionState state, ExplosionDirection direction)
@@ -70,4 +82,20 @@ public class ExplosionManager : MonoBehaviour
         return ExplosionDirection.Right;
     }
 
+
+    private void ClearTile(Vector2 position)
+    {
+        Vector3Int cell = destructibleTiles.WorldToCell(position);
+        TileBase tile = destructibleTiles.GetTile(cell);
+
+        if(tile != null)
+        {
+            Instantiate(obstaclePrefab, position, Quaternion.identity);
+            destructibleTiles.SetTile(cell, null);
+            Debug.Log("IM GONNA CLEAR YA!");
+        }
+    }
+
+
 }
+

@@ -12,6 +12,7 @@ public class BombController : MonoBehaviour
     private PlayerStats stats;
     private int bombsRemaining;
 
+
     private void Awake()
     {
         stats = GetComponent<PlayerStats>();
@@ -40,7 +41,6 @@ public class BombController : MonoBehaviour
 
 
     private void PlaceBomb()
-
     {
         Vector2 position = transform.position;
 
